@@ -1,5 +1,5 @@
 ﻿{
-  "generatedUtc": "2026-02-10T20:24:30.1777387Z",
+  "generatedUtc": "2026-02-23T08:20:32.1966751Z",
   "pages": [
     {
       "route": "/docs",
@@ -7468,9 +7468,17 @@
           "code": "McpClientConfigExample",
           "kind": "snippet",
           "sourcePath": "Pages/Docs/Examples/McpClientConfigExample.snippet",
-          "content": "{\r\n  \"servers\": {\r\n    \"blazorise-docs\": {\r\n      \"type\": \"http\",\r\n      \"url\": \"https://mcp.blazorise.com/mcp/sse\"\r\n    }\r\n  }\r\n}",
-          "title": "Example MCP client entry",
-          "description": "Add this entry to your .mcp.json file and update the url if needed."
+          "content": "{\r\n  \"servers\": {\r\n    \"blazorise-docs\": {\r\n      \"type\": \"http\",\r\n      \"url\": \"https://mcp.blazorise.com/mcp\"\r\n    }\r\n  }\r\n}",
+          "title": "HTTP (streamable) config",
+          "description": "Use this for clients that support MCP streamable HTTP transport."
+        },
+        {
+          "code": "McpClientSseConfigExample",
+          "kind": "snippet",
+          "sourcePath": "Pages/Docs/Examples/McpClientSseConfigExample.snippet",
+          "content": "{\r\n  \"servers\": {\r\n    \"blazorise-docs\": {\r\n      \"type\": \"sse\",\r\n      \"url\": \"https://mcp.blazorise.com/mcp/sse\"\r\n    }\r\n  }\r\n}",
+          "title": "SSE config",
+          "description": "Use this for clients that connect through the SSE MCP transport."
         }
       ]
     },

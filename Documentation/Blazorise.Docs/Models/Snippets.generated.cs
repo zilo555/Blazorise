@@ -4711,6 +4711,15 @@ Proin volutpat, sapien ut facilisis ultricies, eros purus blandit velit, at ultr
   ""servers"": {
     ""blazorise-docs"": {
       ""type"": ""http"",
+      ""url"": ""https://mcp.blazorise.com/mcp""
+    }
+  }
+}";
+
+        public const string McpClientSseConfigExample = @"{
+  ""servers"": {
+    ""blazorise-docs"": {
+      ""type"": ""sse"",
       ""url"": ""https://mcp.blazorise.com/mcp/sse""
     }
   }
