@@ -16,18 +16,37 @@ for /r "." %%P in (*.csproj) do (
     set "projectPath=%%~fP"
     set "projectDir=%%~dpP"
     set "profilePath=!projectDir!Properties\PublishProfiles\FolderProfile.pubxml"
+    set "publishDir="
 
     if exist "!profilePath!" (
         set /a projectsWithProfile+=1
+
+        for /f "tokens=3 delims=<>" %%U in ('findstr /i /c:"<PublishDir>" "!profilePath!"') do (
+            if not defined publishDir set "publishDir=%%U"
+        )
+
+        if not defined publishDir (
+            for /f "tokens=3 delims=<>" %%U in ('findstr /i /c:"<PublishUrl>" "!profilePath!"') do (
+                if not defined publishDir set "publishDir=%%U"
+            )
+        )
+
         echo.
-        echo Publishing %%~nxP using FolderProfile.pubxml...
-        dotnet publish "!projectPath!" -c Release -p:PublishProfile=FolderProfile
-        if errorlevel 1 (
+        if not defined publishDir (
             echo Publish failed: %%~fP
+            echo   Reason: PublishUrl/PublishDir not found in FolderProfile.pubxml
             set /a failed+=1
         ) else (
-            echo Publish succeeded: %%~fP
-            set /a succeeded+=1
+            echo Publishing %%~nxP using FolderProfile.pubxml...
+            echo   Target: !publishDir!
+            dotnet publish "!projectPath!" -c Release -p:PublishProfile=FolderProfile -p:PublishDir="!publishDir!"
+            if errorlevel 1 (
+                echo Publish failed: %%~fP
+                set /a failed+=1
+            ) else (
+                echo Publish succeeded: %%~fP
+                set /a succeeded+=1
+            )
         )
     ) else (
         set /a skipped+=1
